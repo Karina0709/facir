@@ -1,0 +1,199 @@
+#include<stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+//Declaranções de variaveis para uso na estrutura do programa
+int x,y,f,a,b,c;
+/*x usado para menu principal
+y,f para cadastro de filmes
+a,b,c para cadastro de clientes
+*/
+void main(){
+    menuprincipal();
+}
+void menuprincipal(){
+    printf("------Menu Princilpal ------\n\t[1] - Filmes\n\t[2] - Clientes\n\t[3] - Estoque\n\t[4] - Aluguel\n\t[0] - Sair\n ");
+    printf("Digite o numero correspondente a opcao que voce deseja: ");
+    scanf("%d", &x);
+    switch(x){
+        case 1:
+            menufilme();
+            break;
+        case 2:
+            menuclientes();
+            break;
+    //case 3:
+     //   menuestoque();
+    //case 4:
+    //    menualuguel();
+    case 5:
+        exit(0);
+    }
+    system("pause");
+    system("cls");
+}
+void menufilme(){
+    printf("------Menu Filmes ------\n\t[1] - Cadastrar Filme\n\t[2] - Editar filme\n\t[3] - Excluir filme\n \t[4] - Listar filmes\n\t [5] - Voltar\n");
+    printf("Digite o numero correspondente a opcao que voce deseja: ");
+    scanf("%d", &y);
+    switch(y){
+        case 1:
+            cadastrarfilme();
+            break;
+        case 2:
+            editarfilme();
+            break;
+        case 4:
+            listafilmes();
+        case 5:
+            menuprincipal();
+        }
+            system("pause");
+            system("cls");
+}
+//Estrutura do cadastro de filmes
+typedef struct filmes{
+    int id;
+    char titulo[15];
+    int ano;
+    char genero[15];
+}yfilmes;
+//nome da lista de filmes no sistema e quantidade para salvar
+yfilmes listaf[10];
+//Posição dos filmes no cadastro
+void pos(){
+    printf("\nQual o id do filme: ");
+    scanf("%d",&f);
+    f-=1;
+}
+//Cadastro de filmes no programa
+void cadastrarfilme(){
+    pos();
+    listaf[f].id=f+1;
+    printf("\nQual o titulo do filme?: ");
+    scanf("%s", &listaf[f].titulo);
+    printf("\nQual o ano do filme: ");
+    scanf("%d", &listaf[f].ano);
+    setbuf(stdin,NULL);
+    printf("\nQual o genero do filme: ");
+    scanf("%s", &listaf[f].genero);
+    //Exibir filme cadastrado
+    printf("\n%d %s %d %s\n\n",listaf[f].id,&listaf[f].titulo,listaf[f].ano,listaf[f].genero);
+    //Limpar tela para usuario escolher mais uma opção
+    //system("cls");
+    //chamar a função do menu principal
+    menuprincipal();
+}
+void editarfilme(){
+//variavel para ajudar no comando do if
+int escolha;
+
+printf("\n\t [1]- Atualizar \n\t [2]- Excluir\n\t [0] - Voltar\n ");
+printf("Digite a sua opcao desejada: ");
+scanf("%d",&escolha);
+if(escolha == 1){
+    printf("Qual a id nova id do filme?");
+    scanf("%d", &listaf[f].id);
+    printf("\nQual o titulo do filme?:");
+    scanf("%s", &listaf[f].titulo);
+    printf("\nQual o ano do filme:");
+    scanf("%d", &listaf[f].ano);
+    setbuf(stdin,NULL);
+    printf("\nQual o genero do filme:");
+    scanf("%s", &listaf[f].genero);
+    //system("cls");
+    menuprincipal();
+    }else{
+    menuprincipal();
+    }
+
+}
+
+//menu clientes
+void menuclientes(){
+    printf("------Menu Clientes ------\n\t[1] - Cadastrar Clientes\n\t[2] - Editar clientes\n\t[3] - Excluir Clientes\n \t[4] - Listar Clientes\n\t [5] - Voltar\n");
+    printf("Digite o numero correspondente a opcao que voce deseja: ");
+    scanf("%d", &a);
+    switch(a){
+        case 1:
+            cadastrarclientes();
+            break;
+        case 2:
+            editarclientes();
+            break;
+        case 4:
+            listaclientes();
+        case 5:
+            menuprincipal();
+
+    }
+}
+//funcao para listar filmes
+void listafilmes(){
+    for(int i=0;i<11;i++){
+            printf("%s\n",listaf[i].titulo);
+        }
+
+        }
+//estrutura da lista clientes
+typedef struct clientes{
+    int id;
+    char nome[50];
+    char cpf[13];
+    char email[50];
+}yclientes;
+//nome da lista de clientes no sistema e quantidade para salvar
+yclientes listac[4];
+//Posição dos clientes no cadastro
+void posclientes(){
+    printf("\nQual o id do cliente: ");
+    scanf("%d",&b);
+    b-=1;
+}
+//Cadastro de clientes no programa
+void cadastrarclientes(){
+    posclientes();
+    listac[b].id=b+1;
+    printf("\nQual seu nome: ");
+    scanf("%s", &listac[b].nome);
+    printf("\nQual o seu CPF(somente numeros): ");
+    scanf("%s", &listac[b].cpf);
+    setbuf(stdin,NULL);
+    printf("\nQual o seu email: ");
+    scanf("%s", &listac[b].email);
+    //Exibir clientes cadastrado
+    printf("\n%d %s %s %s\n\n",listac[b].id,&listac[b].nome,listac[b].cpf,listac[b].email);
+    //Limpar tela para usuario escolher mais uma opção
+    //system("cls");
+    //chamar a função do menu principal
+    menuprincipal();
+}
+//funcao para listar clientes
+void listaclientes(){
+    for(int i=0;i<5;i++){
+        printf("%s\n",listac[b].nome);
+    }
+
+}
+void editarclientes(){
+//variavel para ajudar no comando do if
+int escolha2;
+
+printf("\n\t [1] - Atualizar \n\t [2] - Excluir\n\t [0] - Voltar\n ");
+printf("Digite a sua opcao desejada: ");
+scanf("%d",&escolha2);
+if(escolha2 == 1){
+    printf("\nQual sua posicao no cadastro?");
+    scanf("%d", &listac[b].id);
+    printf("\nQual seu nome?:");
+    scanf("%s", &listac[b].nome);
+    printf("\nQual seu CPF(somente numeros):");
+    scanf("%s", &listac[b].cpf);
+    setbuf(stdin,NULL);
+    printf("\nQual seu EMAIL:");
+    scanf("%s", &listac[b].email);
+    //system("cls");
+    menuprincipal();
+    }else{
+    menuprincipal();
+    }
+}
